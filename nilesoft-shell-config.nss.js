@@ -41,7 +41,9 @@ modify( find="Envoyer vers" Position=7 sep="both" )
 
 // item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/powershell.vbs" args=@sel.path vis=@key.shift() Position=9 )
 
-item( vis=@(sel.count > 1) title="Copy path (@sel.count) items selected" mode="multiple" cmd=command.copy( path.separator( sel( true, "\n" ) ) ) sep="both" )
+item( vis=@(sel.count > 1) title='Copy path (@sel.count) items selected' mode="multiple" cmd=command.copy( path.separator( sel( true, "\n" ) ) ) sep="both" )
+
+// double quote dosen't work with variable
 
 item( title="Copier le chemin" cmd=command.copy( path.separator( sel.path ) ) sep="both" )
 
