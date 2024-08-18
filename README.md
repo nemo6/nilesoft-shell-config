@@ -1,0 +1,2 @@
+# nilesoft-shell-config
+test
