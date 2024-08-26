@@ -1,8 +1,3 @@
-settings
-{
-	exclude.where = !process.is_explorer
-}
-
 import "imports/theme.nss"
 
 remove( find="Regrouper par")
@@ -37,17 +32,15 @@ modify( find="Éditer avec" Visibility="Normal" )
 
 modify( find="7-zip" vis=@key.shift() )
 
-modify( find="Envoyer vers" Position=7 sep="both" )
+modify( find="Envoyer vers" Position=9 sep="both" )
 
 // item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/powershell.vbs" args=@sel.path vis=@key.shift() Position=9 )
 
-item( vis=@(sel.count > 1) title='Copy path (@sel.count) items selected' mode="multiple" cmd=command.copy( path.separator( sel( true, "\n" ) ) ) sep="both" )
-
-// double quote dosen't work with variable
+item( vis=@(sel.count > 1) title='Copy path @(sel.count) items selected' mode="multiple" cmd=command.copy( path.separator( sel( true, "\n" ) ) ) sep="both" )
 
 item( title="Copier le chemin" cmd=command.copy( path.separator( sel.path ) ) sep="both" )
 
-item( title="Open with Sublime Text (2)" cmd="C:/Program Files/Sublime Text 4/sublime_text.exe" args=@sel.path Position=3 sep="both" type="file" )
+// item( title="Open with Sublime Text (2)" cmd="C:/Program Files/Sublime Text 4/sublime_text.exe" args=@sel.path Position=3 sep="both" type="file" )
 
 modify( find= "Open with Sublime Text" Position=3 sep="both" )
 
@@ -56,3 +49,27 @@ modify( find= "Open with Sublime Text" Position=3 sep="both" )
 remove( find="Ouvrir la fenêtre PowerShell ici" type="dir" )
 
 remove( find="Ouvrir l'interpréteur de commandes Linux ici" type="dir" )
+
+// ╔ Terminal ╗
+
+	menu( title="Terminal" sep="top" mode="multiple" ){}
+
+	item( title="Ouvrir avec vscode" cmd="C:/Users/nemo6/AppData/Local/Programs/Microsoft VS Code/Code.exe" args='"@sel.path"' Parent="Terminal" )
+
+// ╚ Terminal ╝
+
+// ╔ Hide file ╗
+
+	// item( vis=@(sel.count > 0) title='Hide files : @(sel.count)' mode="multiple" cmd='node "C:\\Users\\nemo6\\Downloads\\Nouveau dossier\\app.js" @( path.separator( sel( true, " " ) ) )' sep="both" )
+
+	item(
+		vis=@(sel.count > 0)
+		title='Hide file : @(sel.count)'
+		mode="multiple"
+		cmd args='/c node "C:/Users/nemo6/Dropbox/E lab2/a.code/command/hide_file/hide_file.js" @( path.separator( sel( true, " " ) ) )'
+		window=hidden
+		sep="both"
+		Parent="Terminal"
+	)
+
+// ╚ Hide file ╝
