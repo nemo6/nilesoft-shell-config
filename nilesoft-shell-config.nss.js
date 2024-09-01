@@ -27,14 +27,18 @@ remove( find="Choisir comme arrière-plan du bureau")
 remove( find="Faire pivoter")
 remove( find="Lire sur l’appareil")
 remove( find="Ouvrir dans un nouveau processus")
+remove( find="Transférer copie")
+remove( find="Stocker en ligne")
+
+// $has_admin=key.shift()
 
 modify( find="Éditer avec" Visibility="Normal" )
 
-modify( find="7-zip" vis=@key.shift() )
-
 modify( find="Envoyer vers" Position=9 sep="both" )
 
-// item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/powershell.vbs" args=@sel.path vis=@key.shift() Position=9 )
+modify( find= "Open with Sublime Text" Position=3 sep="both" )
+
+modify( find="7-zip" vis=@key.shift() Position=4 )
 
 item( vis=@(sel.count > 1) title='Copy path @(sel.count) items selected' mode="multiple" cmd=command.copy( path.separator( sel( true, "\n" ) ) ) sep="both" )
 
@@ -42,13 +46,18 @@ item( title="Copier le chemin" cmd=command.copy( path.separator( sel.path ) ) se
 
 // item( title="Open with Sublime Text (2)" cmd="C:/Program Files/Sublime Text 4/sublime_text.exe" args=@sel.path Position=3 sep="both" type="file" )
 
-modify( find= "Open with Sublime Text" Position=3 sep="both" )
+// ╔ PowerShell ╗
 
-// $has_admin=key.shift()
+	remove( find="Ouvrir la fenêtre PowerShell ici" )
 
-remove( find="Ouvrir la fenêtre PowerShell ici" type="dir" )
+	item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/vbs/powershell.vbs" args='"@sel.path"' vis=@key.shift() where=( window.is_desktop and sel.type==2 ) Position=9 )
 
-remove( find="Ouvrir l'interpréteur de commandes Linux ici" type="dir" )
+	item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/vbs/powershell.vbs" args='"@sel.path"' vis=@key.shift() where=( !window.is_desktop )Position=10 )
+
+// ╚ PowerShell ╝
+
+// remove( find="Ouvrir la fenêtre PowerShell ici" type="dir" )
+// remove( find="Ouvrir l'interpréteur de commandes Linux ici" type="dir" )
 
 // ╔ Terminal ╗
 
@@ -60,11 +69,9 @@ remove( find="Ouvrir l'interpréteur de commandes Linux ici" type="dir" )
 
 // ╔ Hide file ╗
 
-	// item( vis=@(sel.count > 0) title='Hide files : @(sel.count)' mode="multiple" cmd='node "C:\\Users\\nemo6\\Downloads\\Nouveau dossier\\app.js" @( path.separator( sel( true, " " ) ) )' sep="both" )
-
 	item(
 		vis=@(sel.count > 0)
-		title='Hide file : @(sel.count)'
+		title='Hide file'
 		mode="multiple"
 		cmd args='/c node "C:/Users/nemo6/Dropbox/E lab2/a.code/command/hide_file/hide_file.js" @( path.separator( sel( true, " " ) ) )'
 		window=hidden
