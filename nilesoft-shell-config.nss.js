@@ -3,7 +3,7 @@ settings
 	priority=1
 	exclude.where = !process.is_explorer
 	showdelay = 0
-	// modify.remove.duplicate=1
+	modify.remove.duplicate=1
 	tip.enabled=true
 }
 
@@ -44,11 +44,13 @@ remove( find="Gérer accès dossier")
 
 // modify( find="Éditer avec" Visibility="Normal" )
 
-modify( find="Open with Sublime Text" Position=3 sep="both" )
+menu( title="Terminal" sep="top" mode="multiple" sep="both" ){}
 
-modify( find="7-zip" vis=@key.shift() Position=4 )
+modify( find="Open with Sublime Text" Position=4 sep="both" )
 
-modify( find="Envoyer vers" sep="both" Position=6 )
+modify( find="7-zip" vis=@key.shift() Position=5 sep="both" )
+
+modify( find="Restaurer" Position=0 )
 
 // ╔ Copier le chemin ╗
 
@@ -64,13 +66,21 @@ modify( find="Envoyer vers" sep="both" Position=6 )
 
 	item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/vbs/powershell.vbs" args='"@sel.path"' vis=@key.shift() where=( window.is_desktop and sel.type==2 ) Position=9 )
 
-	item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/vbs/powershell.vbs" args='"@sel.path"' vis=@key.shift() where=( !window.is_desktop and sel.type==3 ) Position=10 )
+	item( title="Ouvrir la fenêtre PowerShell ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/vbs/powershell.vbs" args='"@sel.path"' vis=@key.shift() where=( !window.is_desktop and sel.type==3 ) Position=11 )
 
 // ╚ PowerShell ╝
 
-// ╔ Terminal ╗
+// ╔ wsl2 ╗
 
-	menu( title="Terminal" sep="top" mode="multiple" ){}
+	remove( find="Ouvrir l'interpréteur de commandes Linux ici" )
+
+	// item( title="Ouvrir l'interpréteur de commandes Linux ici" cmd="wsl" args='--cd "@sel.path"' vis=@key.shift() )
+
+	item( title="Ouvrir l'interpréteur de commandes Linux ici" cmd="C:/Users/nemo6/Dropbox/E lab2/a.code/vbs/wsl2.vbs" args='"@sel.path"' vis=@key.shift() )
+
+// ╚ wsl2 ╝
+
+// ╔ Terminal ╗
 
 	item( title="Ouvrir avec vscode" cmd="C:/Users/nemo6/AppData/Local/Programs/Microsoft VS Code/Code.exe" args='"@sel.path"' Parent="Terminal" )
 
